@@ -36,6 +36,7 @@ class SodukuSolverTest {
 
 }
 
+//https://codepen.io/puzankov/pen/eYZyZPX?editors=0012
 fun solveSudokuString(input: List<List<String>>) {
   val matrix: List<List<Int?>> = input.map { it.map { it.toIntOrNull() } }
   solveSudoku(matrix)
