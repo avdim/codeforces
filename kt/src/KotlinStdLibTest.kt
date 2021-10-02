@@ -17,4 +17,21 @@ class KotlinStdLibTest {
         println(ls)
     }
 
+  @Test
+  fun collectionVideoSebastian() {
+    val objects = listOf("🌱", "🚀", "💡", "🐧", "⚙️", "🤖", "📚")
+    println(objects.chunked(3) { it.reversed() })
+    // [[💡, 🚀, 🌱], [🤖, ⚙️, 🐧], [📚]]
+        println(objects.windowed(4, 2, partialWindows = true))
+    // [[🌱, 🚀, 💡, 🐧], [💡, 🐧, ⚙️, 🤖], [⚙️, 🤖, 📚], [📚]]
+  }
+
+  @Test
+  fun listsVideoSebastian() {
+    val m = mutableListOf("a", "b", "c")
+    val s = m.subList(1,2)
+    s[0] = "0"
+    print(m)
+  }
+
 }
