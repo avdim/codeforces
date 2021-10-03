@@ -1,3 +1,5 @@
+import kotlin.math.min
+
 fun main() {
   val (n, m) = readInts()
 
@@ -14,13 +16,15 @@ fun main() {
 
         class Item(val value: Int, val count: Int)
 
-        val sortedItems = slice.groupBy { it }.map { Item(value = it.key, count = it.value.size) }.sortedBy { it.count }
+        val sortedItems = slice.groupBy { it }.map { it.value.size }.sorted()
 
         if (sortedItems.size < k) {
           println(-1)
         } else {
-          val minDif = sortedItems.windowed(k, 1).minOf {
-            it.last().count - it.first().count
+          var minDif = Int.MAX_VALUE
+          val deltaK = k - 1
+          for(start in 0 until sortedItems.size - deltaK) {
+            minDif = min(minDif, sortedItems[start + deltaK] - sortedItems[start])
           }
           println(minDif)
         }
