@@ -1,5 +1,3 @@
-package leetcode
-
 import kotlin.reflect.KClass
 
 fun main() {
