@@ -1,9 +1,23 @@
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class BinaryHeapTest {
   @Test
   fun test1() {
+    val input = listOf(1, 6, 5,10, 5, 1, 0, 12)
+    val result = input.heapSort()
+    println(result)
+    assertEquals(input.sorted(), result)
+  }
 
+  fun List<Int>.heapSort():List<Int> {
+    val heap = MinBinaryHeap<Int>()
+    forEach {
+      heap.insert(it)
+    }
+    return List(size) {
+      heap.removeMin()!!
+    }
   }
 
   class MinBinaryHeap<T : Comparable<T>>() {
@@ -12,7 +26,7 @@ class BinaryHeapTest {
       a.add(x)
       //sift up
       var i = a.lastIndex
-      while (i.parentIndex >= 0 && a[i.parentIndex] < a[i]) {
+      while (i.parentIndex >= 0 && a[i.parentIndex] > a[i]) {
         a.swap(i, i.parentIndex)
         i = i.parentIndex
       }
