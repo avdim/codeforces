@@ -1,6 +1,3 @@
-package leetcode
-
-import com.sun.tools.sjavac.Log.log
 
 fun main() {
   println(listOf(1, 2, 3, 4).groupBy { it % 2 == 0 })
