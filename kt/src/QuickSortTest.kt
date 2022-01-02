@@ -26,16 +26,15 @@ class QuickSortTest {
 fun <T : Comparable<T>> quickSort(arr: Array<T>) {
   fun split(l: Int, r: Int, x: Int): Int {
     val value = arr[x]
-    var m = l + 1
-    arr.swap(l, x)//Сохраняем x
-    for (i in l until r) {
+    arr.swap(r - 1, x)//Сохраняем x
+    var m = l
+    for (i in l until (r - 1)) {
       if (arr[i] < value) {
         arr.swap(m, i)
         m++
       }
     }
-    m--
-    arr.swap(l, m)//Восстанавливаем элемент с позиции x
+    arr.swap(r - 1, m)//Восстанавливаем элемент с позиции x
     return m
   }
   fun sort(l: Int, r: Int) {
