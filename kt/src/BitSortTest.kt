@@ -2,7 +2,7 @@ import org.junit.Test
 import kotlin.random.Random
 import kotlin.test.assertEquals
 
-class QuickSortTest {
+class BitSortTest {
 
   @Test
   fun testRandom() {
@@ -11,7 +11,7 @@ class QuickSortTest {
         Random.nextInt(0, 100)
       }
       val expected = input.toList().sorted()
-      quickSort(input)
+      testBitSort(input)
       val actual = input.toList()
       assertEquals(expected, actual)
       println(actual)
@@ -23,7 +23,7 @@ class QuickSortTest {
 
 }
 
-fun <T : Comparable<T>> quickSort(arr: Array<T>) {
+fun <T : Comparable<T>> testBitSort(arr: Array<T>) {
   fun split(l: Int, r: Int, x: Int): Int {
     val value = arr[x]
     arr.swap(r - 1, x)//Сохраняем x
@@ -46,11 +46,4 @@ fun <T : Comparable<T>> quickSort(arr: Array<T>) {
     sort(m+1, r)
   }
   sort(0, arr.size)
-}
-
-inline fun <T> Array<T>.swap(i: Int, j: Int) {
-  val ai = get(i)
-  val aj = get(j)
-  set(i, aj)
-  set(j, ai)
 }
