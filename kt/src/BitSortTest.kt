@@ -1,4 +1,6 @@
 import org.junit.Test
+import javax.script.ScriptContext
+import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
 import kotlin.system.measureNanoTime
 import kotlin.test.assertEquals
@@ -13,12 +15,13 @@ class BitSortTest {
   @Test
   fun testRandom() {
     fun checkInRandomArray() {
-      val input = Array(1024) {
+      val input = Array(1024*1024) {
         Random.nextInt(0, 1000)
       }
       val inputCopy = input.copyOf()
       val t1 = measureNanoTime {
-        quickSort(inputCopy)
+//        quickSort(inputCopy)
+        inputCopy.sort()
       }.also {
         println("quickSort: $it")
       }
@@ -41,30 +44,6 @@ class BitSortTest {
       val result = arr.size / blocks
       return result
     }
-    fun sort(l: Int, r: Int) {
-      fun split(l: Int, r: Int, x: Int): Int {
-        val value = arr[x]
-        arr.swap(r - 1, x)//Сохраняем x
-        var m = l
-        for (i in l until (r - 1)) {
-          if (arr[i] < value) {
-            arr.swap(m, i)
-            m++
-          }
-        }
-        arr.swap(r - 1, m)//Восстанавливаем элемент с позиции x
-        return m
-      }
-
-
-      if (r - l <= 1) {
-        return
-      }
-      val m = split(l, r, Random.nextInt(l, r))
-      sort(l, m)
-      sort(m+1, r)
-    }
-
     fun merge(l1: Int, r1: Int, l2: Int, r2: Int) {
       val beginCopy = Array(r1 - l1) { arr[l1 + it] }
       var firstPointer = 0
@@ -89,7 +68,8 @@ class BitSortTest {
       }
     }
     repeat(blocks) { i ->
-      sort(i * blockSize(), (i + 1) * blockSize())
+      arr.sort(i * blockSize(), (i + 1) * blockSize())
+//      sort(i * blockSize(), (i + 1) * blockSize())
     }
     while (blocks > 1) {
       blocks /= 2
