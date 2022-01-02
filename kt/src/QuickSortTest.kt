@@ -1,16 +1,24 @@
 import org.junit.Test
 import kotlin.random.Random
+import kotlin.test.assertEquals
 
 class QuickSortTest {
 
   @Test
   fun testRandom() {
-    val input = Array(10) {
-      Random.nextInt(0, 10)
+    fun checkInRandomArray() {
+      val input = Array(Random.nextInt(0, 100)) {
+        Random.nextInt(0, 100)
+      }
+      val expected = input.toList().sorted()
+      quickSort(input)
+      val actual = input.toList()
+      assertEquals(expected, actual)
+      println(actual)
     }
-    quickSort(input)
-//    input.toList().sorted()
-    println(input.toList())
+    repeat(10) {
+      checkInRandomArray()
+    }
   }
 
 }
