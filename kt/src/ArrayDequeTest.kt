@@ -21,3 +21,21 @@ class ArrayDequeTest {
     assertEquals(listOf(2,1), values)
   }
 }
+
+/**
+ *
+ *
+DFS
+fun dfs(board: Board, initial: Cell): Set<Cell> {
+val visited = mutableSetOf<Cell>()
+val queue = ArrayDeque<Cell>()
+queue += initial
+while (queue.isNotEmpty()) {
+val cell = queue.removeFirst()
+visited += cell
+queue += board.getUpperNeighbors(cell)
+}
+return visited
+}
+
+ */
